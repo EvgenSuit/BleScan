@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">BleScan</string>
+    <string name="grant_permissions">Grant necessary permissions to continue</string>
+    <string name="grant">Grant</string>
+    <string name="turn_on_bluetooth">Turn on bluetooth in order to see BLE devices</string>
+
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="rssi">RSSI</string>
+    <string name="distance">Distance</string>
+    <string name="db">db</string>
+    <string name="unknown">Unknown</string>
+    <string name="meters">m</string>
+
+    <string name="stop">Stop</string>
+    <string name="start">Start</string>
+    <string name="descending">Desc</string>
+    <string name="ascending">Asc</string>
+    <string name="filter">Filter: All/Beacons</string>
+
+    <string name="nothing_to_show">Nothing to show</string>
+</resources>
