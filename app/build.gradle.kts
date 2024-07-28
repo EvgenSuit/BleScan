@@ -64,7 +64,10 @@ dependencies {
     implementation(libs.koin)
     implementation(libs.accompanist)
     implementation(libs.datastore)
+    implementation(libs.nv.bluetooth)
 
+
+    testImplementation(libs.mockk)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

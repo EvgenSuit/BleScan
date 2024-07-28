@@ -1,6 +1,5 @@
 package com.ble.scan.scanner.presentation.ui
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,9 +14,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -32,6 +30,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
@@ -51,16 +50,19 @@ fun TurnOnBluetoothPrompt() {
                 Alignment.CenterVertically),
             modifier = it.fillMaxHeight()
         ) {
-            Image(painter = painterResource(id = R.drawable.bluetooth),
+            Image(painter = painterResource(id = R.drawable.bluetooth_disabled),
                 colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground),
-                contentDescription = "Bluetooth")
-            Text(text = stringResource(id = R.string.turn_on_bluetooth))
+                contentDescription = "Bluetooth",
+                modifier = Modifier.size(70.dp))
+            Text(text = stringResource(id = R.string.turn_on_bluetooth),
+                style = MaterialTheme.typography.displaySmall)
         }
     }
 }
 
 @Composable
 fun PermissionRequestComposable(
+    modifier: Modifier,
     onRequest: () -> Unit,
 ) {
     ConstrainedElement {
@@ -68,7 +70,9 @@ fun PermissionRequestComposable(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(50.dp,
                 Alignment.CenterVertically),
-            modifier = it.fillMaxSize()
+            modifier = it
+                .then(modifier)
+                .fillMaxSize()
         ) {
             Text(text = stringResource(id = R.string.grant_permissions),
                 style = MaterialTheme.typography.displayMedium)
@@ -99,6 +103,7 @@ fun BleDeviceDetails(device: BLEDevice) {
                 if (device.isBeacon) {
                     BeaconInfo(device = device)
                 }
+                ConnectableInfo(isConnectable = device.isConnectable)
             }
         }
     }
@@ -129,6 +134,18 @@ fun MainDeviceInfo(device: BLEDevice) {
             Text("${device.rssi} ${stringResource(id = R.string.db)}",
                 style = MaterialTheme.typography.displaySmall)
         }
+    }
+}
+
+@Composable
+fun ConnectableInfo(isConnectable: Boolean) {
+    Row(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(stringResource(id = if (isConnectable) R.string.is_connectable else R.string.is_not_connectable),
+            style = MaterialTheme.typography.displaySmall.copy(
+                color = if (isConnectable) Color.Green else MaterialTheme.colorScheme.error
+            ))
     }
 }
 
@@ -181,7 +198,7 @@ fun Controls(
             onClick = { onAction(ControlAction.Sort(!sortDescending)) }
         )
         ControlButton(
-            text = stringResource(id = R.string.filter),
+            text = "${stringResource(id = R.string.filter)} ${stringResource(id = if (filterAll) R.string.all else R.string.beacons)}",
             onClick = { onAction(ControlAction.Filter(!filterAll)) })
     }
 }

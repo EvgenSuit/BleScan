@@ -1,19 +1,24 @@
 package com.ble.scan.scanner.domain
 
-import android.bluetooth.le.ScanResult
-import android.util.Log
-import java.math.BigDecimal
-import java.math.RoundingMode
-import kotlin.math.pow
-
 class BeaconDistanceProvider {
-    fun calculateDistance(txPower: Int, rssi: Int): Double? {
-        val ratio = rssi / txPower
-        if (rssi == 0) {
+    fun calculateEddystoneDistance(rssi: Int, txPower: Int, n: Double = 2.0): Double? {
+        if (rssi == 0 || txPower == 0) {
             return null
-        } else if (ratio < 1.0) {
-            return Math.pow(ratio.toDouble(), 10.0)
         }
-        return (0.89976) * Math.pow(ratio.toDouble(), 7.7095) + 0.111
+        val adjustedRssi = if (rssi > 0) -rssi else rssi
+        return Math.pow(10.0, (txPower - adjustedRssi) / (10 * n))
+    }
+    fun calculateIBeaconDistance(rssi: Int, txPower: Int): Double? {
+        if (rssi == 0 || txPower == 0) {
+            return null
+        }
+        val ratio = (rssi / txPower).toDouble()
+        val positiveRatio = Math.abs(ratio)
+
+        return if (positiveRatio < 1.0) {
+            Math.pow(positiveRatio, 10.0)
+        } else {
+            (0.89976) * Math.pow(positiveRatio, 7.7095) + 0.111
+        }
     }
 }

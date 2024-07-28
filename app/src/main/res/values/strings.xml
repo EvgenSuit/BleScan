@@ -16,7 +16,11 @@
     <string name="start">Start</string>
     <string name="descending">Desc</string>
     <string name="ascending">Asc</string>
-    <string name="filter">Filter: All/Beacons</string>
+    <string name="filter">Filter: </string>
+    <string name="all">All</string>
+    <string name="beacons">Beacons</string>
+    <string name="is_connectable">Is connectable</string>
+    <string name="is_not_connectable">Is not connectable</string>
 
     <string name="nothing_to_show">Nothing to show</string>
 </resources>
