@@ -113,9 +113,10 @@ fun BleScannerContent(
                 state = lazyColumnState,
                 modifier = Modifier.fillMaxWidth(),
                 contentPadding = PaddingValues(10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
-                items(transformedDevices, key = {it.address}) { device ->
+                items(transformedDevices) { device ->
                     BleDeviceDetails(device = device)
                 }
             }

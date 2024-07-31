@@ -12,7 +12,6 @@ koin = "3.5.6"
 accompanist = "0.34.0"
 splashscreen = "1.0.1"
 datastore = "1.1.1"
-mockk = "1.12.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,9 +33,6 @@ datastore = { module = "androidx.datastore:datastore-preferences", version.ref =
 splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 koin = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 accompanist = { module = " com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
-nv-bluetooth = { module = "com.neovisionaries:nv-bluetooth", version = "1.8" }
-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
-
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

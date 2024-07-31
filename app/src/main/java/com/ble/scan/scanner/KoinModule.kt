@@ -1,6 +1,7 @@
 package com.ble.scan.scanner
 
 import android.bluetooth.BluetoothManager
+import androidx.activity.ComponentActivity
 import com.ble.scan.scanner.data.BleScanDataStore
 import com.ble.scan.scanner.data.dataStore
 import com.ble.scan.scanner.domain.BLERepository
@@ -15,7 +16,7 @@ val repositoryModule = module {
     single { PermissionHandler(androidContext()) }
     single { androidContext().getSystemService(BluetoothManager::class.java) as BluetoothManager }
     single { BluetoothStateObserver(get(), androidContext()) }
-    single { BLERepository(get(), get(), get()) }
+    single { BLERepository(get(), get(), get(), androidContext()) }
 }
 
 val utilsModule = module {

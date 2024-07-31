@@ -248,7 +248,7 @@ fun ConstrainedElement(content: @Composable BoxScope.(Modifier) -> Unit) {
     val maxElementWidth = dimensionResource(id = R.dimen.max_device_details_width)
     BoxWithConstraints {
         content(
-            Modifier.then(if (this.maxWidth <= maxElementWidth)
+            Modifier.then(if (this.maxWidth > maxElementWidth)
             Modifier.width(maxElementWidth)
             else Modifier.fillMaxWidth()))
     }
